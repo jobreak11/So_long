@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:54:24 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/01/12 14:11:37 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/01/14 21:55:25 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void is_rectangle(t_game *game, char *file)
 
 void	check_ber(const char *av)
 {
-	int len = strlen(av);
-	if (len < 4 || strncmp(&av[len - 4], ".ber", 4) != 0)
+	int len = ft_strlen(av);
+	if (len < 4 || ft_strncmp(&av[len - 4], ".ber", 4) != 0)
 	{
 		write(2, "Error\nPlease provide a .ber file\n", 34);
 		exit(EXIT_FAILURE);

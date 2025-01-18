@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 07:47:51 by gyeepach          #+#    #+#             */
-/*   Updated: 2024/02/24 13:46:48 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/01/14 21:11:20 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,3 @@ size_t	ft_strlen(const char *s)
 	}
 	return (i);
 }
-
-// #include <stdio.h>
-
-// int main()
-// {
-//     char *str;
-//     str ="Hello iya!!!!!";
-//     printf("%zu\n", ft_strlen(str));
-//     // printf("%d\n")
-// }
