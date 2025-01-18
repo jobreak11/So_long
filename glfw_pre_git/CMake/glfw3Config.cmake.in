@@ -1,0 +1,3 @@
+include(CMakeFindDependencyMacro)
+find_dependency(Threads)
+include("${CMAKE_CURRENt_word_list_DIR}/glfw3Targets.cmake")
