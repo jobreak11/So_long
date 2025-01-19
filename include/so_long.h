@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 20:02:30 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/01/17 20:42:31 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/01/18 23:28:04 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ typedef struct s_game {
 	int P_count;
 } t_game;
 
-
+void    free_map_delete_object(t_game *game);
 void 	first_or_last_line_all_one(t_game *game);
 void	objects_init(t_game *game);
 void	check_ber(const char *av);
@@ -139,7 +139,7 @@ void	draw_background(t_game *game);
 void	loop_draw_background(t_game *game, int row);
 void	draw_object_into_paper(t_game *game);
 void	loop_draw_grid_by_grid(t_game* game, int row);
-
+char	*check_flood_fill(char **map, int player_of_rows, int player_of_cols, int *C_count);
 void    movement(t_game *game);
 void    objects_react(t_game *game, int row, int col);
 

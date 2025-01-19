@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 15:16:41 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/01/18 12:14:50 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/01/19 08:03:48 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void check_elements(t_game *game, int check_rows, int check_cols)
         game->P_count++;
 		game->player.P_row = check_rows;
 		game->player.P_col = check_cols;
-		printf("\nPlayer: %d, %d\n", game->player.P_row, game->player.P_col);
 	}
     if (game->map[check_rows][check_cols] == 'C')
         game->C_count++;
@@ -97,7 +96,4 @@ void	count_check_element(t_game *game)
 	check_player(game->P_count);
 	check_collectable(game->C_count);
 	check_exit(game->E_count);
-	printf("Player: %d\n", game->P_count);
-	printf("Collectables: %d\n", game->C_count);
-	printf("Exit: %d\n", game->E_count);
 }

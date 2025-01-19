@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:29:43 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/01/11 16:52:43 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/01/19 08:08:07 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int open_file(char *file)
 
 int newline_to_terminated(t_game *game)
 {
-	int current_length = strlen(game->line);
+	int current_length = ft_strlen(game->line);
 	if (current_length > 0 && game->line[current_length - 1] == '\n')
 	{
 		game->line[current_length - 1] = '\0';
@@ -55,7 +55,7 @@ int newline_to_terminated(t_game *game)
 
 void handle_first_line(t_game *game)
 {
-	*game->line_length = strlen(game->line);
+	*game->line_length = ft_strlen(game->line);
 	game->first_line = *game->line_length;
 	first_or_last_line_all_one(game);
 }
@@ -64,15 +64,15 @@ void handle_last_line(t_game *game)
 {
 	if (game->last_line)
         free(game->last_line);
-    game->last_line = strdup(game->line);
-	if (strlen(game->last_line) != game->first_line)
+    game->last_line = ft_strdup(game->line);
+	if (ft_strlen(game->last_line) != game->first_line)
 		game->error = 1;
 	first_or_last_line_all_one(game);
 }
 
 void covered_by_one(t_game *game)
 {
-    int len = strlen(game->line);
+    int len = ft_strlen(game->line);
 
     if (game->line[0] != '1')
     {

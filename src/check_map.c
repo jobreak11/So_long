@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:54:24 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/01/14 21:55:25 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/01/19 08:07:43 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void process_lines(t_game *game)
 	game->line_count = 0;
 	while ((game->line = get_next_line(game->fd)))
 	{
-		game->map[game->line_count] = strdup(game->line);
+		game->map[game->line_count] = ft_strdup(game->line);
 		game->current_length = newline_to_terminated(game);
 		some_line_is_empty(game);
 		if (game->error == 1)
@@ -79,17 +79,20 @@ void	check_ber(const char *av)
 void	checks(t_game *game ,char *file)
 {
 
-	size_t i = 0;
 	is_rectangle(game, file);
     free(game->line_length);
     free(game->last_line);
-	while (i < game->map_height + 1)
-	{
-		printf("%s", game->map[i]);
-		i++;
-	}
+	game->P_count = 0;
+	game->C_count = 0;
+	game->E_count = 0;
 	count_check_element(game);
-	// if (game->check_flood_pass == 0)
-	// 	check_flood_fill(game->map, player_row, player_col, &game->C_count);
-	// game->check_flood_pass = 1;
+	if (game->check_flood_pass == 0)
+	{
+		check_flood_fill(game->map, game->player.P_row, game->player.P_col, &game->C_count);
+		game->P_count = 0;
+		game->C_count = 0;
+		game->E_count = 0;
+		free_map(game);
+		game->check_flood_pass = 1;
+	}
 }

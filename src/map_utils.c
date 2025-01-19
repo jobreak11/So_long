@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 18:10:41 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/01/11 16:01:26 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/01/18 22:17:45 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int	len_to_newline_in_file(char *file)
 			++i;
 		}
 	}
+	++len;
 	close(fd);
 	return (len);	
 }
