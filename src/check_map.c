@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:54:24 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/01/20 22:15:44 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/01/21 20:55:45 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	process_lines(t_game *game)
 		game->map[game->line_count] = ft_strdup(game->line);
 		game->current_length = newline_to_terminated(game);
 		some_line_is_empty(game);
-		if (game->error == 1)
-			break ;
 		if (game->line_count == game->map_height)
 			handle_last_line(game);
 		else if (first_non_empty_line == 1 && game->current_length != 0)
@@ -50,8 +48,9 @@ void	process_lines(t_game *game)
 
 void	is_rectangle(t_game *game, char *file)
 {
-	int	last_line_len;
+	size_t last_line_len;
 
+	
 	game->fd = open_file(file);
 	game->map_height = len_to_newline_in_file(file);
 	game->line_length = (int *)malloc(sizeof(int));
@@ -63,10 +62,8 @@ void	is_rectangle(t_game *game, char *file)
 		return ;
 	}
 	process_lines(game);
-	last_line_len = ft_strlen(game->map[game->map_height - 1]);
-	if (game->map[game->map_height - 1] == NULL)
-		last_line_is_empty(game);
-	else if ((size_t)last_line_len != game->first_line)
+	last_line_len = ft_strlen(game->map[game->map_height - 2]) - 1;
+	if (last_line_len != game->first_line)
 		last_line_not_equal_first(game);
 	game->map_width = game->first_line;
 	close(game->fd);
@@ -97,9 +94,9 @@ void	checks(t_game *game, char *file)
 	if (game->check_flood_pass == 0)
 	{
 		check_flood_fill(game, game->player.P_row, game->player.P_col);
-		game->P_count = 0;
-		game->C_count = 0;
-		game->E_count = 0;
+		// game->P_count = 0;
+		// game->C_count = 0;
+		// game->E_count = 0;
 		game->check_flood_pass = 1;
 		free_map(game);
 	}

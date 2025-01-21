@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 20:59:30 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/01/20 23:23:25 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/01/21 20:32:44 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	game_init_set_zero(t_game *game)
 {
 	game->fd = 0;
 	game->map_height = 0;
+	game->map_width = 0;
 	game->line = NULL;
 	game->line_length = NULL;
 	game->last_line = NULL;
@@ -61,15 +62,16 @@ int	main(int ac, char **av)
 	game_init_set_zero(&game);
 	checks(&game, av[1]);
 	checks(&game, av[1]);
-	game.mlx = mlx_init(MAP_WIDTH * 64, MAP_HEIGHT * 64, "so_long", false);
-	objects_init(&game);
-	draw_background(&game);
-	draw_object_into_paper(&game);
-	ft_printf("\nCollectibles: %d\n", game.C_count);
-	movement(&game);
-	mlx_loop(game.mlx);
-	free_map_delete_object(&game);
-	mlx_terminate(game.mlx);
+	// game.mlx = mlx_init(MAP_WIDTH * 64, MAP_HEIGHT * 64, "so_long", false);
+	// objects_init(&game);
+	// draw_background(&game);
+	// draw_object_into_paper(&game);
+	// ft_printf("\nCollectibles: %d\n", game.C_count);
+	// movement(&game);
+	// mlx_loop(game.mlx);
+	// free_map_delete_object(&game);
+	// mlx_terminate(game.mlx);
+	free_map(&game);
 	return (0);
 }
 // 473,496 escape game passed

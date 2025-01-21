@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 20:02:30 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/01/20 23:07:08 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/01/21 20:29:44 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ void	covered_by_one(t_game *game);
 void	objects_init(t_game *game);
 void	error_free_close(t_game *game);
 void	free_map(t_game *game);
+
 
 void	count_check_element(t_game *game);
 void	check_elements(t_game *game, int check_rows, int check_cols);

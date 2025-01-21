@@ -2,5 +2,6 @@
     "files.associations": {
         "so_long.h": "c",
         "mlx42_int.h": "c"
-    }
+	},
+	"cmake.sourceDirectory": "/home/gyeepach/so_long_completed_joe/MLX42"
 }
