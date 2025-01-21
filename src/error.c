@@ -6,48 +6,33 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:34:11 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/01/19 14:21:38 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/01/20 23:16:00 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// void    free_map_delete_object(t_game *game)
-// {
-//     mlx_delete_texture(game->floor.texture);
-//     mlx_delete_texture(game->player.player_buffer);
-//     mlx_delete_texture(game->wall.wall_buffer);
-//     mlx_delete_texture(game->collectible.collectible_buffer);
-//     mlx_delete_texture(game->exit.exit_buffer);
-//     mlx_delete_image(game->mlx, game->floor.floor_object);
-//     mlx_delete_image(game->mlx, game->player.player_object);
-//     mlx_delete_image(game->mlx, game->wall.wall_object);
-//     mlx_delete_image(game->mlx, game->collectible.collectible_object);
-//     mlx_delete_image(game->mlx, game->exit.exit_object);
-//     free_map(game);
-// }
-
-void    free_map_delete_object(t_game *game)
+void	free_map_delete_object(t_game *game)
 {
-    mlx_delete_texture(game->floor.texture);
-    mlx_delete_texture(game->player.player_buffer);
-    mlx_delete_texture(game->wall.wall_buffer);
-    mlx_delete_texture(game->collectible.collectible_buffer);
-    mlx_delete_texture(game->exit.exit_buffer);
-    mlx_delete_image(game->mlx, game->floor.floor_object);
-    mlx_delete_image(game->mlx, game->player.player_object);
-    mlx_delete_image(game->mlx, game->wall.wall_object);
-    mlx_delete_image(game->mlx, game->collectible.collectible_object);
-    mlx_delete_image(game->mlx, game->exit.exit_object);
-    free_map(game);
+	mlx_delete_texture(FLOOR_BUFFER);
+	mlx_delete_texture(PLAYER_BUFFER);
+	mlx_delete_texture(WALL_BUFFER);
+	mlx_delete_texture(COLLECTIBLE_BUFFER);
+	mlx_delete_texture(EXIT_BUFFER);
+	mlx_delete_image(game->mlx, FLOOR_OBJECT);
+	mlx_delete_image(game->mlx, PLAYER_OBJECT);
+	mlx_delete_image(game->mlx, WALL_OBJECT);
+	mlx_delete_image(game->mlx, COLLECTIBLE_OBJECT);
+	mlx_delete_image(game->mlx, EXIT_OBJECT);
+	free_map(game);
 }
 
-void free_map(t_game *game)
+void	free_map(t_game *game)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
-    while(i < game->map_height)
+	while (i < game->map_height)
 	{
 		free(game->map[i]);
 		i++;
@@ -55,17 +40,32 @@ void free_map(t_game *game)
 	free(game->map);
 }
 
-void error_free_close(t_game *game)
+void	error_free_close(t_game *game)
 {
-    if (game->line)
-        free(game->line);
-    if (game->line_length)
-        free(game->line_length);
-    if (game->last_line)
-        free(game->last_line);
-    free_map(game);
-    write(2, "Error\nMap is not a rectangle\n", 29);
-    close(game->fd);
-    exit(1);
+	if (game->line)
+		free(game->line);
+	if (game->line_length)
+		free(game->line_length);
+	if (game->last_line)
+		free(game->last_line);
+	free_map(game);
+	write(2, "Error\nMap is not a rectangle\n", 29);
+	close(game->fd);
+	exit(1);
 }
 
+void	last_line_is_empty(t_game *game)
+{
+	close(game->fd);
+	free_map(game);
+	ft_printf("last line is null\n");
+	exit(1);
+}
+
+void	last_line_not_equal_first(t_game *game)
+{
+	close(game->fd);
+	free_map(game);
+	ft_printf("last line not equal first\n");
+	exit(1);
+}

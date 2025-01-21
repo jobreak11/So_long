@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 20:02:30 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/01/18 23:28:04 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/01/20 23:07:08 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "MLX42/MLX42.h"
 # include "libft/libft.h"
 # include "../get_next_line/get_next_line.h"
+# include "ft_printf/ft_printf.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
@@ -27,19 +28,27 @@
 # define MAP_WALL_OBJECT '1'
 # define MAP_FLOOR_OBJECT '0'
 
-# define ERROR_ARGS "Error\nPlease provide a map file at the argument\n"
-# define ERROR_BER "Error\nPlease provide a .ber file\n"
-# define ERROR_MAP "Error\nInvalid map\n"
-# define ERROR_EMPTY_MAP "Error\nEmpty map\n"
-# define ERROR_MAP_RECTANGLE "Error\nMap is not a rectangle\n"
-# define ERROR_MAP_WALL "Error\nMap is not surrounded by walls\n"
-# define ERROR_MAP_PLAYER "Error\nMap has no player\n"
-# define ERROR_MAP_COLLECTIBLE "Error\nMap has no collectible\n"
-# define ERROR_MAP_EXIT "Error\nMap has no exit\n"
+# define FLOOR_OBJECT game->floor.floor_object
+# define PLAYER_OBJECT game->player.player_object
+# define COLLECTIBLE_OBJECT game->collectible.collectible_object
+# define EXIT_OBJECT game->exit.exit_object
+# define WALL_OBJECT game->wall.wall_object
+# define FLOOR_BUFFER game->floor.texture
+# define PLAYER_BUFFER game->player.player_buffer
+# define COLLECTIBLE_BUFFER game->collectible.collectible_buffer
+# define EXIT_BUFFER game->exit.exit_buffer
+# define WALL_BUFFER game->wall.wall_buffer
+# define Pos_row game->player.P_row
+# define Pos_col game->player.P_col
 
-#define WIDTH 512
-#define HEIGHT 512
+# define FLOOR_PATH "./content/grass.png"
+# define PLAYER_PATH "./content/Player.png"
+# define WALL_PATH "./content/wall.png"
+# define COLLECTIBLE_PATH "./content/Collectable.png"
+# define EXIT_PATH "./content/exit.png"
 
+# define MAP_WIDTH game.map_width
+# define MAP_HEIGHT game.map_height
 
 typedef struct s_floor {
 	mlx_texture_t *texture;
@@ -67,8 +76,8 @@ typedef struct s_collectible {
 
 typedef struct s_exit {
 	mlx_texture_t *exit_buffer;
-    mlx_image_t *exit_object;
-    int E_count;
+	mlx_image_t *exit_object;
+	int E_count;
 } t_exit;
 
 typedef struct s_image {
@@ -79,7 +88,7 @@ typedef struct s_image {
 } t_image;
 
 typedef struct s_game {
-    action_t action;
+	action_t action;
 	mlx_t *mlx;
 	char **map;
 	int	check_flood_pass;
@@ -111,11 +120,11 @@ typedef struct s_game {
 	int P_count;
 } t_game;
 
-void    free_map_delete_object(t_game *game);
-void 	first_or_last_line_all_one(t_game *game);
+void	free_map_delete_object(t_game *game);
+void	first_or_last_line_all_one(t_game *game);
 void	objects_init(t_game *game);
 void	check_ber(const char *av);
-void 	checks(t_game *game ,char *file);
+void	checks(t_game *game ,char *file);
 void	is_rectangle(t_game *game, char *file);
 int		len_to_newline_in_file(char *file);
 int		open_file(char *file);
@@ -127,10 +136,10 @@ void	handle_last_line(t_game *game);
 void	covered_by_one(t_game *game);
 void	objects_init(t_game *game);
 void	error_free_close(t_game *game);
-void 	free_map(t_game *game);
+void	free_map(t_game *game);
 
 void	count_check_element(t_game *game);
-void 	check_elements(t_game *game, int check_rows, int check_cols);
+void	check_elements(t_game *game, int check_rows, int check_cols);
 void	check_player(int P_count);
 void	check_collectable(int C_count);
 void	check_exit(int E_count);
@@ -139,8 +148,16 @@ void	draw_background(t_game *game);
 void	loop_draw_background(t_game *game, int row);
 void	draw_object_into_paper(t_game *game);
 void	loop_draw_grid_by_grid(t_game* game, int row);
-char	*check_flood_fill(char **map, int player_of_rows, int player_of_cols, int *C_count);
-void    movement(t_game *game);
-void    objects_react(t_game *game, int row, int col);
+char	*check_flood_fill(t_game *game, int player_of_rows, int player_of_cols);
+void	flood_error_case_1(t_game *game);
+void	flood_error_case_2(t_game *game);
+void	flood_error_case_3(t_game *game);
+void	movement(t_game *game);
+void	objects_react(t_game *game, int row, int col);
+
+void	last_line_is_empty(t_game *game);
+void	last_line_not_equal_first(t_game *game);
+
+void	fd_is_minus_one(int fd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 20:59:30 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/01/19 19:50:47 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/01/20 23:23:25 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 void	objects_init(t_game *game)
 {
-	game->floor.texture = mlx_load_png("./content/grass.png");
-	game->player.player_buffer = mlx_load_png("./content/Player.png");
-	game->wall.wall_buffer = mlx_load_png("./content/wall.png");
-	game->collectible.collectible_buffer = mlx_load_png("./content/Collectable.png");
-	game->exit.exit_buffer = mlx_load_png("./content/exit.png");
-	game->floor.floor_object = mlx_texture_to_image(game->mlx, game->floor.texture);
-	game->player.player_object = mlx_texture_to_image(game->mlx, game->player.player_buffer);
-	game->wall.wall_object = mlx_texture_to_image(game->mlx, game->wall.wall_buffer);
-	game->collectible.collectible_object = mlx_texture_to_image(game->mlx, game->collectible.collectible_buffer);
-	game->exit.exit_object = mlx_texture_to_image(game->mlx, game->exit.exit_buffer);
+	FLOOR_BUFFER = mlx_load_png(FLOOR_PATH);
+	PLAYER_BUFFER = mlx_load_png(PLAYER_PATH);
+	WALL_BUFFER = mlx_load_png(WALL_PATH);
+	COLLECTIBLE_BUFFER = mlx_load_png(COLLECTIBLE_PATH);
+	EXIT_BUFFER = mlx_load_png(EXIT_PATH);
+	FLOOR_OBJECT = mlx_texture_to_image(game->mlx, FLOOR_BUFFER);
+	PLAYER_OBJECT = mlx_texture_to_image(game->mlx, PLAYER_BUFFER);
+	WALL_OBJECT = mlx_texture_to_image(game->mlx, WALL_BUFFER);
+	COLLECTIBLE_OBJECT = mlx_texture_to_image(game->mlx, COLLECTIBLE_BUFFER);
+	EXIT_OBJECT = mlx_texture_to_image(game->mlx, EXIT_BUFFER);
 }
 
 void	game_init_set_zero(t_game *game)
@@ -33,7 +33,6 @@ void	game_init_set_zero(t_game *game)
 	game->line = NULL;
 	game->line_length = NULL;
 	game->last_line = NULL;
-	game->line_count = 0;
 	game->first_line = 0;
 	game->current_length = 0;
 	game->error = 0;
@@ -48,32 +47,33 @@ void	game_init_set_zero(t_game *game)
 	game->collected_collectibles_count = 0;
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_game	game;
 
 	if (ac != 2)
 	{
-		printf("Usage: %s <map_file>\n", av[0]);
-		return 1;
+		ft_printf("Usage: %s <map_file>\n", av[0]);
+		return (1);
 	}
-    check_ber(av[1]);
+	check_ber(av[1]);
 	game.check_flood_pass = 0;
 	game_init_set_zero(&game);
-	checks(&game , av[1]);
-	checks(&game , av[1]);
-	game.mlx = mlx_init(game.map_width * 64, game.map_height * 64, "so_long", false);
+	checks(&game, av[1]);
+	checks(&game, av[1]);
+	game.mlx = mlx_init(MAP_WIDTH * 64, MAP_HEIGHT * 64, "so_long", false);
 	objects_init(&game);
 	draw_background(&game);
 	draw_object_into_paper(&game);
-	printf("\nCollectibles: %d\n", game.C_count);
-	movement(&game);;
+	ft_printf("\nCollectibles: %d\n", game.C_count);
+	movement(&game);
 	mlx_loop(game.mlx);
 	free_map_delete_object(&game);
-	mlx_close_window(game.mlx);
 	mlx_terminate(game.mlx);
-    return (0);
+	return (0);
 }
+// 473,496 escape game passed
+// 473,496 play win game passed
 
 // int    main(int ac, char **av)  // 470,085 leak for laptop
 // {

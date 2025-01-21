@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 17:12:47 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/01/12 14:08:44 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/01/20 22:22:39 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	clean_list(t_word_list **list)
 {
 	t_word_list	*last_node;
 	t_word_list	*clean_node;
-	int		i;
-	int		j;
-	char	*buf;
+	int			i;
+	int			j;
+	char		*buf;
 
 	buf = malloc(BUFFER_SIZE + 1);
 	clean_node = malloc(sizeof(t_word_list));
@@ -104,7 +104,7 @@ char	create_list(t_word_list **list, int fd)
 char	*get_next_line(int fd)
 {
 	static t_word_list	*list = NULL;
-	char			*next_line;
+	char				*next_line;
 	t_word_list			*temp;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
