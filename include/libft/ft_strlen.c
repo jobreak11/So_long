@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 07:47:51 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/01/14 21:11:20 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/01/22 19:44:10 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ size_t	ft_strlen(const char *s)
 
 	i = 0;
 	while (s[i] != '\0')
-	{
 		i++;
-	}
 	return (i);
 }

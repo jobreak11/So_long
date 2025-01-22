@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 20:59:30 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/01/21 20:32:44 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/01/22 21:21:43 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	game_init_set_zero(t_game *game)
 	game->map_height = 0;
 	game->map_width = 0;
 	game->line = NULL;
-	game->line_length = NULL;
 	game->last_line = NULL;
 	game->first_line = 0;
 	game->current_length = 0;
@@ -46,6 +45,7 @@ void	game_init_set_zero(t_game *game)
 	game->collectible.C_count = 0;
 	game->exit.E_count = 0;
 	game->collected_collectibles_count = 0;
+	game->line_count = 0;
 }
 
 int	main(int ac, char **av)
@@ -61,7 +61,7 @@ int	main(int ac, char **av)
 	game.check_flood_pass = 0;
 	game_init_set_zero(&game);
 	checks(&game, av[1]);
-	checks(&game, av[1]);
+	// checks(&game, av[1]);
 	// game.mlx = mlx_init(MAP_WIDTH * 64, MAP_HEIGHT * 64, "so_long", false);
 	// objects_init(&game);
 	// draw_background(&game);
@@ -71,7 +71,6 @@ int	main(int ac, char **av)
 	// mlx_loop(game.mlx);
 	// free_map_delete_object(&game);
 	// mlx_terminate(game.mlx);
-	free_map(&game);
 	return (0);
 }
 // 473,496 escape game passed

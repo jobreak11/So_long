@@ -39,7 +39,7 @@ fclean: clean
 
 re: clean all
 
-.PHONY: all clean fclean re libmlx
+.PHONY: all libmlx clean fclean re 
 
 
 

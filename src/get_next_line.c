@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/22 17:12:47 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/01/20 22:22:39 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/01/22 19:08:28 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,20 +126,3 @@ char	*get_next_line(int fd)
 	clean_list(&list);
 	return (next_line);
 }
-
-// int main(void)
-// {
-// 	int fd = open("test.txt", O_RDONLY);
-// 	char *line;
-// 	int no = 1;
-// 	line = get_next_line(fd);
-// 	while (line)
-// 	{
-// 		printf("%i: %s", no, line);
-// 		free(line);
-// 		line = get_next_line(fd);
-// 		no++;
-// 	}
-// 	close(fd);
-// 	return (0);
-// }

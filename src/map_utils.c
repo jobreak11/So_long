@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 18:10:41 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/01/20 23:20:13 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/01/22 21:44:04 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	len_to_newline_in_file(char *file)
 		}
 		bytes_read = read(fd, buffer, sizeof(buffer));
 	}
-	++len;
 	close(fd);
 	return (len);
 }
@@ -46,7 +45,6 @@ void	first_or_last_line_all_one(t_game *game)
 	size_t	i;
 
 	i = 0;
-	game->error = 0;
 	if (!game->line)
 		error_free_close(game);
 	while (game->line[i] != '\0')
@@ -68,13 +66,13 @@ void	covered_by_one(t_game *game)
 	if (game->line[0] != '1')
 	{
 		game->error = 1;
-		ft_printf("Error: First character is not '1'.\n");
+		ft_putstr_fd("Error\n First char is not '1'.\n", 2);
 		return ;
 	}
 	if (game->line[len - 1] != '1')
 	{
 		game->error = 1;
-		ft_printf("Error: Last character is not '1'.\n");
+		ft_printf("Error\n Last char is not '1'.\n", 2);
 		return ;
 	}
 }

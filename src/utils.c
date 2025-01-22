@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 15:29:43 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/01/20 23:01:17 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/01/22 21:35:50 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,7 @@ int	newline_to_terminated(t_game *game)
 
 void	handle_first_line(t_game *game)
 {
-	*game->line_length = ft_strlen(game->line);
-	game->first_line = *game->line_length;
+	game->first_line = ft_strlen(game->line);
 	first_or_last_line_all_one(game);
 }
 

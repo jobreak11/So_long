@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:34:11 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/01/21 21:00:06 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/01/22 21:56:10 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,11 @@ void	free_map(t_game *game)
 	size_t	i;
 
 	i = 0;
-	while (i < game->map_height - 1)
+	while (i < game->map_height + 1)
 	{
 		free(game->map[i]);
 		i++;
 	}
-	i += 1;
-	free(game->map[i]);
 	free(game->map);
 }
 
@@ -46,28 +44,22 @@ void	error_free_close(t_game *game)
 {
 	if (game->line)
 		free(game->line);
-	if (game->line_length)
-		free(game->line_length);
 	if (game->last_line)
 		free(game->last_line);
 	free_map(game);
-	write(2, "Error\nMap is not a rectangle\n", 29);
+	ft_putstr_fd("Error\nMap is not a rectangle\n", 2);
 	close(game->fd);
 	exit(1);
 }
 
 void	last_line_is_empty(t_game *game)
 {
-	close(game->fd);
-	free_map(game);
-	ft_printf("last line is null\n"); // write 2  Error ตามด้วย newline
-	exit(1);
+	game->error = 1;
+	ft_putstr_fd("Error\nlast line is null\n", 2);
 }
 
 void	last_line_not_equal_first(t_game *game)
 {
-	close(game->fd);
-	free_map(game);
-	ft_printf("last line not equal first\n"); // write 2
-	exit(1);
+	game->error = 1;
+	ft_putstr_fd("Error\nlast line not equal first\n", 2);
 }
