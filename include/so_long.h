@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 20:02:30 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/01/21 20:29:44 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/01/23 18:59:45 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ typedef struct s_game {
 	char *line;
 	char *last_line;
 	int	error;
+	int is_empty;
 	int C_count;
 	int E_count;
 	int P_count;
@@ -137,13 +138,13 @@ void	covered_by_one(t_game *game);
 void	objects_init(t_game *game);
 void	error_free_close(t_game *game);
 void	free_map(t_game *game);
-
+void	free_map_and_empty_line(t_game *game);
 
 void	count_check_element(t_game *game);
 void	check_elements(t_game *game, int check_rows, int check_cols);
-void	check_player(int P_count);
-void	check_collectable(int C_count);
-void	check_exit(int E_count);
+void	check_player(t_game *game);
+void	check_collectable(t_game *game);
+void	check_exit(t_game *game);
 
 void	draw_background(t_game *game);
 void	loop_draw_background(t_game *game, int row);

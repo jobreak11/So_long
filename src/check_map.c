@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:54:24 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/01/22 21:59:09 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/01/23 21:49:55 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,14 @@ void	some_line_is_empty(t_game *game)
 }
 void	process_lines(t_game *game)
 {
-	static int	first_non_empty_line = 1;
+	int	first_non_empty_line;
 
+	first_non_empty_line = 1;
 	game->line = get_next_line(game->fd);
-	while (game->line)
+	while(1)
 	{
+		if (!game->line)
+			break ;
 		game->map[game->line_count] = ft_strdup(game->line);
 		game->current_length = newline_to_terminated(game);
 		some_line_is_empty(game);
@@ -36,7 +39,6 @@ void	process_lines(t_game *game)
 			handle_last_line(game);
 		else
 			covered_by_one(game);
-		printf("%ld: %s\n", game->line_count, game->map[game->line_count]);
 		game->line_count++;
 		free(game->line);
 		game->line = get_next_line(game->fd);
@@ -44,36 +46,6 @@ void	process_lines(t_game *game)
 	if (game->error == 1)
 		error_free_close(game);
 }
-
-// void	process_lines(t_game *game)
-// {
-// 	// static int	first_non_empty_line = 1;
-
-// 	game->line = get_next_line(game->fd);
-// 	while (game->line)
-// 	{
-// 		game->map[game->line_count] = ft_strdup(game->line);
-// 		// game->current_length = newline_to_terminated(game);
-// 		// some_line_is_empty(game);
-// 		// if (game->line_count == game->map_height)
-// 		// 	handle_last_line(game);
-// 		// else if (first_non_empty_line == 1 && game->current_length != 0)
-// 		// {
-// 		// 	handle_first_line(game);
-// 		// 	first_non_empty_line = 0;
-// 		// }
-// 		// else
-// 		// 	covered_by_one(game);
-// 		game->line_count++;
-// 		printf("%s\n", game->map[game->line_count]);
-// 		game->line = get_next_line(game->fd);
-// 		free(game->line);
-// 	}
-// 	free_map(game);
-// 	exit(0);
-// 	if (game->error == 1)
-// 		error_free_close(game);
-// }
 
 void	is_rectangle(t_game *game, char *file)
 {
@@ -85,10 +57,17 @@ void	is_rectangle(t_game *game, char *file)
 		exit(1);
 	}
 	game->map = (char **)malloc(sizeof(char *) * (game->map_height + 1));
+	ft_memset(game->map, 0, sizeof(char *) * (game->map_height + 1));
 	process_lines(game);
+	if (game->map[game->map_height] == NULL)
+	{
+		free(game->last_line);
+		free_map_and_empty_line(game);
+		ft_putstr_fd("Error\nlast line is null\n", 2);
+		exit(1);
+	}
 	free(game->last_line);
-	free_map(game);	
-	// game->map_width = game->first_line;
+	game->map_width = game->first_line;
 	close(game->fd);
 }
 
@@ -107,17 +86,15 @@ void	check_ber(const char *av)
 void	checks(t_game *game, char *file)
 {
 	is_rectangle(game, file);
-	// game->P_count = 0;
-	// game->C_count = 0;
-	// game->E_count = 0;
-	// count_check_element(game);
-	// if (game->check_flood_pass == 0)
-	// {
-	// 	check_flood_fill(game, game->player.P_row, game->player.P_col);
-	// 	// game->P_count = 0;
-	// 	// game->C_count = 0;
-	// 	// game->E_count = 0;
-	// 	game->check_flood_pass = 1;
-	// 	free_map(game);
-	// }
+	game->P_count = 0;
+	game->C_count = 0;
+	game->E_count = 0;
+	count_check_element(game);
+	if (game->check_flood_pass == 0)
+	{
+		check_flood_fill(game, game->player.P_row, game->player.P_col);
+		game->check_flood_pass = 1;
+		free_map(game);
+		return ;
+	}
 }

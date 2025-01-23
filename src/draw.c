@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 19:10:28 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/01/20 23:01:00 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/01/23 21:57:21 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	draw_background(t_game *game)
 	size_t	i;
 
 	i = 0;
-	while (i < game->map_height)
+	while (i < game->map_height + 1)
 	{
 		loop_draw_background(game, i);
 		i++;
@@ -72,7 +72,7 @@ void	draw_object_into_paper(t_game *game)
 	size_t	i;
 
 	i = 0;
-	while (i < game->map_height)
+	while (i < game->map_height + 1)
 	{
 		loop_draw_grid_by_grid(game, i);
 		i++;

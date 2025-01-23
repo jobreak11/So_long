@@ -6,7 +6,7 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:34:11 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/01/22 21:56:10 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/01/23 18:31:43 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,19 @@ void	free_map(t_game *game)
 
 	i = 0;
 	while (i < game->map_height + 1)
+	{
+		free(game->map[i]);
+		i++;
+	}
+	free(game->map);
+}
+
+void	free_map_and_empty_line(t_game *game)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < game->map_height)
 	{
 		free(game->map[i]);
 		i++;

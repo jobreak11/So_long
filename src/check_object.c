@@ -6,45 +6,50 @@
 /*   By: gyeepach <gyeepach@student.42bangkok.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 15:16:41 by gyeepach          #+#    #+#             */
-/*   Updated: 2025/01/20 22:18:01 by gyeepach         ###   ########.fr       */
+/*   Updated: 2025/01/23 20:58:43 by gyeepach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	check_player(int P_count)
+void	check_player(t_game *game)
 {
-	if (P_count > 1)
+	if (game->P_count > 1)
 	{
 		write(2, "Error\nToo many players\n", 24);
+		free_map(game);
 		exit(1);
 	}
-	if (P_count == 0)
+	if (game->P_count == 0)
 	{
 		write(2, "Error\nNo player\n", 17);
+		free_map(game);
 		exit(1);
 	}
 }
 
-void	check_collectable(int C_count)
+void	check_collectable(t_game *game)
 {
-	if (C_count == 0)
+	if (game->C_count == 0)
 	{
 		write(2, "Error\nNo collectable\n", 21);
+		free_map(game);
 		exit(1);
 	}
 }
 
-void	check_exit(int E_count)
+void	check_exit(t_game *game)
 {
-	if (E_count == 0)
+	if (game->E_count == 0)
 	{
 		write(2, "Error\nNo exit\n", 14);
+		free_map(game);
 		exit(1);
 	}
-	if (E_count > 1)
+	if (game->E_count > 1)
 	{
 		write(2, "Error\nToo many exits\n", 22);
+		free_map(game);
 		exit(1);
 	}
 }
@@ -94,7 +99,7 @@ void	count_check_element(t_game *game)
 		}
 		check_rows++;
 	}
-	check_player(game->P_count);
-	check_collectable(game->C_count);
-	check_exit(game->E_count);
+	check_player(game);
+	check_collectable(game);
+	check_exit(game);
 }
